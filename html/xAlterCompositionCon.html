@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Information based on ego's alters values on a continuous...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for xAlterCompositionCon {xUCINET}"><tr><td>xAlterCompositionCon {xUCINET}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Information based on ego's alters values on a continuous variable.</h2>
+
+<h3>Description</h3>
+
+<p>This function takes a one-mode or two-mode matrix (<code>NET1</code>) and a vector containing a continuous nodal attribute (<code>ATTR1</code>).
+It returns for each node in the rows of the matrix information related to the attribute data of this node's alters.
+For valued networks it weights the impact of alters by the strength of its ties.
+For a two-mode network, results are provided for the row nodes based on attribute data of the alters (column nodes).
+In this case the attribute needs to be a vector containing information for the column nodes.
+As an output it provides by default:
+</p>
+
+<ul>
+<li><p> &quot;SumAlterV&quot;: the (weighted) sum of the values for the alters of ego (Sj(Xij*Rj)),
+</p>
+</li>
+<li><p> &quot;AvAlterV&quot;: the (weighted) sum of the values for the alters of ego and divides by the number of (non-missing) alters ((Sj(Xij*Rj))/(N-1)),
+</p>
+</li>
+<li><p> &quot;WAvAlterV&quot;: the (weighted) average of the values for the alters of ego as a proportion of the strength of the ties ((Sj(Xij*Rj))/(Sj(Xij))),
+</p>
+</li>
+<li><p> &quot;MinAlterV&quot;: the minimum value for the alters of ego,
+</p>
+</li>
+<li><p> &quot;MaxAlterV&quot;: the maximum value for the alters of ego,
+</p>
+</li>
+<li><p> &quot;RangeAlterV&quot;: the range among the values for the alters of ego,
+</p>
+</li>
+<li><p> &quot;SDAlterV&quot;: the standard deviation of the values for the alters of ego,
+</p>
+</li></ul>
+
+
+
+<h3>Usage</h3>
+
+<pre>
+xAlterCompositionCon(
+  NET1,
+  ATTR1,
+  Measures = c("SumAlterV", "AvAlterV", "WAvAlterV", "MinAlterV", "MaxAlterV",
+    "RangeAlterV", "SDAlterV"),
+  Loops = FALSE,
+  Exclude0 = FALSE,
+  Mode = "OneMode"
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>NET1</code></td>
+<td>
+<p>A network dataset stored as an object of class &quot;matrix&quot;.
+A one-mode network with (n) nodes, or a two-mode network
+with (m) nodes of mode &quot;A&quot; (rows) and (n) nodes of mode &quot;B&quot; (columns).</p>
+</td></tr>
+<tr valign="top"><td><code>ATTR1</code></td>
+<td>
+<p>A continuous attribute vector of size (n).</p>
+</td></tr>
+<tr valign="top"><td><code>Measures</code></td>
+<td>
+<p>The choice of output to be provided. See description.</p>
+</td></tr>
+<tr valign="top"><td><code>Loops</code></td>
+<td>
+<p>Whether to ignore the Loops (default is to ignore the Loops).</p>
+</td></tr>
+<tr valign="top"><td><code>Exclude0</code></td>
+<td>
+<p>Whether to exclude values 0 from the analysis (default is FALSE).</p>
+</td></tr>
+<tr valign="top"><td><code>Mode</code></td>
+<td>
+<p>Whether NET1 is a one-mode (&quot;OneMode&quot;) or two-mode (&quot;TwoMode&quot;) network.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A matrix containing different measures (columns) for each node (row).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Consider the Friendship network for Krackhardt's high-tech managers and the attribute tenure.
+xAlterCompositionCon(Krackhardt_HighTech$Friendship, Krackhardt_HighTech$Attributes$Tenure,
+                     Exclude0=TRUE)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>xUCINET</em> version 0.0.1.0022 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

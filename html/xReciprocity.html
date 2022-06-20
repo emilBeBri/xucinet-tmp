@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Calculates the level of reciprocity in a binary, one-mode...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for xReciprocity {xUCINET}"><tr><td>xReciprocity {xUCINET}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Calculates the level of reciprocity in a binary, one-mode network.</h2>
+
+<h3>Description</h3>
+
+<p>This function takes a one-mode network and provides information related to the level of reciprocity in the network.
+The basis for calculating the level of reciprocity are the number of mutual (M), asymmetric (A) and null (N) dyads.
+This is better known as the dyad census or MAN distribution.
+We can either count the number of dyads connected by a tie (which may or may not be reciprocated)
+and calculate the proportion of dyads that have reciprocated ties (the dyad based method)
+or we can count the number of arcs (directed edges) and calculate the proportion of arcs that
+are reciprocated (the arc based method).
+Note that the Loops entries (self-nominations) are always ignored for this function and that two-mode data are not allowed.
+The output generates:
+</p>
+
+<ul>
+<li><p> Number and proportion of valid dyads. Dyads where either cell i,j or j,i are missing (indicated by values 'NA' in the matrix) are ignored.
+</p>
+</li>
+<li><p> The density for the network, i.e. the proportion of ties with values 1 (considering only those dyads that have a valid value in both directions),
+</p>
+</li>
+<li><p> The number of mutual dyads (where (i-&gt;j)=1 and (j-&gt;i)=1),
+</p>
+</li>
+<li><p> The number of asymmetric dyads (where (i-&gt;j)=1 and (j-&gt;i)=0, or (i-&gt;j)=0 and (j-&gt;i)=1),
+</p>
+</li>
+<li><p> The number of null dyads (where (i-&gt;j)=0 and (j-&gt;i)=0),
+</p>
+</li>
+<li><p> The dyad based reciprocity: M/(M+A)
+</p>
+</li>
+<li><p> The arc based reciprocity: 2M/(2M+A), which can be compared to the density
+</p>
+</li></ul>
+
+
+
+<h3>Usage</h3>
+
+<pre>
+xReciprocity(NET1)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>NET1</code></td>
+<td>
+<p>A one-mode network stored as a 'matrix' object.#'</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A vector with a series of different measures. See Description.
+</p>
+
+
+<h3>References</h3>
+
+<p>Chapter 10. Borgatti, S. P., Everett, M. G., Johnson, J. C., &amp; Agneessens, F. (2022).
+Analyzing Social Networks Using R. SAGE.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../xUCINET/help/xDensity.html">xDensity()</a></code>, <code><a href="../../xUCINET/help/xTransitivity.html">xTransitivity()</a></code>, <code><a href="../../xUCINET/help/xCyclicality.html">xCyclicality()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## A network with 4 valid dyads, where the density for the values in these 4 dyads is: 5/8.
+NET1&lt;-matrix(c(0,1,NA,0,
+      1,0,1,NA,
+      1,0,1,1,
+      0,NA,1,0),4,4,byrow=TRUE)
+xReciprocity(NET1)
+
+## Krackhardt's high-tech managers:
+xReciprocity(Krackhardt_HighTech$Advice)
+xReciprocity(Krackhardt_HighTech$Friendship)
+xReciprocity(Krackhardt_HighTech$ReportTo)
+
+## To show that the arc reciprocity index would be similar to the density for a
+## random network, let's generate 100 networks of size 50 by 50 with density .3:
+## Store the results for each generated network in RES1:
+RES1&lt;-matrix(NA,100,8)
+## Now generate 100 networks use a loop:
+for (k1 in 1:100)
+  {
+  MA1&lt;-matrix(runif(2500)&gt;=.7,50,50)
+  RES1[k1,]&lt;-t(xReciprocity(MA1))
+  }
+## We can check that the density for the generated networks is around .3:
+mean(RES1[,3])
+## Now, we can check that the arc reciprocity index for the generated graphs.
+## This is indeed around .3:
+mean(RES1[,8])
+## Proving that the arc reciprocity index will be close to the density for a random graph.
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>xUCINET</em> version 0.0.1.0022 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

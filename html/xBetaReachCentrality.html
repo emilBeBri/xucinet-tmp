@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Calculate Beta Reach centrality.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for xBetaReachCentrality {xUCINET}"><tr><td>xBetaReachCentrality {xUCINET}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Calculate Beta Reach centrality.</h2>
+
+<h3>Description</h3>
+
+<p>Calculates the Beta Reach centrality for a one-mode or two-mode network,
+i.e., the number/proportion of nodes reachable in k steps weighted by Beta.
+Beta can be a single value or set of values.(default=.5)
+The Loops for the geodesic distance matrix is by default set to NA.
+Missing data should be indicated by 'NA'.
+</p>
+
+<ul>
+<li><p> Last updated: 1 February 2022.
+</p>
+</li></ul>
+
+
+
+<h3>Usage</h3>
+
+<pre>
+xBetaReachCentrality(NET1, Beta = 0.5, Loops = FALSE, Normalize = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>NET1</code></td>
+<td>
+<p>A one-mode or two-mode network stored as a 'matrix' object.</p>
+</td></tr>
+<tr valign="top"><td><code>Beta</code></td>
+<td>
+<p>A single value or vector contain Beta values.</p>
+</td></tr>
+<tr valign="top"><td><code>Loops</code></td>
+<td>
+<p>Logical statement, whether Loops should be included (default=FALSE).</p>
+</td></tr>
+<tr valign="top"><td><code>Normalize</code></td>
+<td>
+<p>Whether to return the normalized value (divide by theoretical maximum value) or raw counts.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A matrix with Beta reach centrality values.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Undirected one-mode network
+xBetaReachCentrality(Padgett_FlorentineFamilies$Marriage, Beta=c(.5,.3))
+## Directed one-mode network (out-beta reach followed by in-beta reach)
+xBetaReachCentrality((Krackhardt_HighTech$Advice), Beta=c(.4), Normalize=TRUE)
+xBetaReachCentrality(t(Krackhardt_HighTech$Advice), Beta=c(.4), Normalize=TRUE)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>xUCINET</em> version 0.0.1.0022 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

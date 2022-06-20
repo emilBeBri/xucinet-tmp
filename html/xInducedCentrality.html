@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Calculate induced centrality.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for xInducedCentrality {xUCINET}"><tr><td>xInducedCentrality {xUCINET}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Calculate induced centrality.</h2>
+
+<h3>Description</h3>
+
+<p>Induced centrality calculates the change in specific network properties (graph invariants) when a node is removed.
+A graph invariant can be used to induce a centrality score by measuring the contribution each node makes to the network property (e.g. the number of components).
+The induced centrality of a node is the value for the graph invariant for the observed network minus the value for the graph invariant for the observed network but with the node deleted.
+This routine calculates the induced centrality for the following network properties:
+</p>
+
+<ul>
+<li><p> &quot;kReach1&quot;: Number of nodes reachable within geodesic distance 1 (Degree)
+</p>
+</li>
+<li><p> &quot;kReach2&quot;: Number of nodes reachable within geodesic distance 2
+</p>
+</li>
+<li><p> &quot;kReach3&quot;: Number of nodes reachable within geodesic distance 3
+</p>
+</li>
+<li><p> &quot;kReach4&quot;: Number of nodes reachable within geodesic distance 4
+</p>
+</li>
+<li><p> &quot;kReachAll&quot;: Number of nodes reachable within a finite number of nodes
+</p>
+</li>
+<li><p> &quot;RecipCloseness&quot;: Sum of reciprocal geodesic distance to all other nodes
+</p>
+</li>
+<li><p> &quot;Betweenness&quot;: Number of times a node is between other nodes
+No missing data are allowed.
+</p>
+</li>
+<li><p> Last updated: 1 February 2022.
+</p>
+</li></ul>
+
+
+
+<h3>Usage</h3>
+
+<pre>
+xInducedCentrality(NET1)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>NET1</code></td>
+<td>
+<p>A one-mode or two-mode network stored as a 'matrix' object.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A matrix with a series of induced centrality measures, followed by a split between endogeneous and exogeneous.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Undirected one-mode network
+xInducedCentrality(Padgett_FlorentineFamilies$Marriage)
+
+## Directed one-mode network
+xInducedCentrality(Krackhardt_HighTech$Advice)
+xInducedCentrality(t(Krackhardt_HighTech$Advice))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>xUCINET</em> version 0.0.1.0022 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

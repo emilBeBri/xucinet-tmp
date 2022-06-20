@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Calculates Beta centrality (Bonacich's power centrality)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for xBetaCentrality {xUCINET}"><tr><td>xBetaCentrality {xUCINET}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Calculates Beta centrality (Bonacich's power centrality)</h2>
+
+<h3>Description</h3>
+
+<p>Calculates the Beta centrality for a one-mode network, where Beta can be a
+vector of values or a single value, but must be smaller than 1/highest eigenvalue.
+Can to be 'problematic' for directed networks.
+Values can be binary or valued. For valued networks.
+Different normalizations are available in Option.
+No missing data are allowed.
+</p>
+
+<ul>
+<li><p> Last updated: 1 February 2022.
+</p>
+</li></ul>
+
+
+
+<h3>Usage</h3>
+
+<pre>
+xBetaCentrality(NET1, Beta = 0, Loops = FALSE, Option = "None")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>NET1</code></td>
+<td>
+<p>A one-mode or two-mode network stored as a 'matrix' object.</p>
+</td></tr>
+<tr valign="top"><td><code>Beta</code></td>
+<td>
+<p>A single value or vector contain Beta values which need to be smaller than 1/highest eigenvalue.</p>
+</td></tr>
+<tr valign="top"><td><code>Loops</code></td>
+<td>
+<p>Logical statement, whether Loops should be included.</p>
+</td></tr>
+<tr valign="top"><td><code>Option</code></td>
+<td>
+<p>The normalization chosen, which can be one of the following &quot;None&quot; (no normalization), &quot;MAX1&quot; (set maximum value to 1), &quot;SUM1&quot; (set sum of values to 1), &quot;SSQ1&quot; (set sum of squares equal to 1), &quot;SSQN&quot;  (set sum of squares equal to number of nodes)</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A matrix with Beta centrality values.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Undirected one-mode network
+xBetaCentrality(ASNR_Fig09x3, c(0,.1,.2,.3,.4,-.1,-.2), Option="SSQN")
+
+## Directed one-mode network
+xBetaCentrality(ASNR_Fig09x4, Beta=c(0,1,10,100,1000) , Option="SSQN")
+xBetaCentrality(t(ASNR_Fig09x4), Beta=c(0,1,10,100,1000) , Option="SSQN")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>xUCINET</em> version 0.0.1.0022 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

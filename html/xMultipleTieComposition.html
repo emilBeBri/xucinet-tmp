@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Provides the outdegree for multiple types of network...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for xMultipleTieComposition {xUCINET}"><tr><td>xMultipleTieComposition {xUCINET}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Provides the outdegree for multiple types of network relations among the same nodes and a measure of heterogeneity (IQV)</h2>
+
+<h3>Description</h3>
+
+<p>Takes an object of class 'list', with a set of different types of network relations (matrices) among the same nodes stored as elements.
+For the different types of networks it provides for each node:
+</p>
+
+<ul>
+<li><p> the number of valid alters, i.e., the number of alters for which information is available (not equal to NA),
+</p>
+</li>
+<li><p> the degree, i.e., the sum of ties (or tie strengths) to alters (Measures=&quot;SumStrength&quot;),
+</p>
+</li>
+<li><p> the average number of ties (or tie strengths) to alters relative to the number of valid cases (Measures=&quot;AvStrength&quot;),
+</p>
+</li>
+<li><p> the proportion of ties (or tie strengths) for a specific relation relative to the total ties over all relations (Measures=&quot;PropStrength&quot;),
+</p>
+</li>
+<li><p> a measure of heterogeneity using Agresti's index of qualitative variation (IQV) (Measures=&quot;IQVType&quot;).
+</p>
+</li></ul>
+
+
+
+<h3>Usage</h3>
+
+<pre>
+xMultipleTieComposition(
+  LIST1,
+  Measures = c("SumStrength", "AvStrength", "PropStrength", "IQVType"),
+  Loops = FALSE,
+  Mode = "OneMode"
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>LIST1</code></td>
+<td>
+<p>A set of matrices stored as a list object</p>
+</td></tr>
+<tr valign="top"><td><code>Measures</code></td>
+<td>
+<p>The measures to be calculated about the set of networks. Options are: &quot;SumStrength&quot;,&quot;AvStrength&quot;,&quot;PropStrength&quot; and &quot;IQVType&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>Loops</code></td>
+<td>
+<p>Logical, whether the diagonal values should be ignored (default setting is FALSE, i.e., to ignore the diagonal values)</p>
+</td></tr>
+<tr valign="top"><td><code>Mode</code></td>
+<td>
+<p>Whether the set of networks are one-mode &quot;OneMode&quot; or two-mode networks &quot;TwoMode&quot;.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A matrix with different measures (columns) for each node (row)
+</p>
+
+
+<h3>References</h3>
+
+<p>Chapter 8 in Borgatti, S. P., Everett, M. G., Johnson, J. C., &amp; Agneessens, F. (2022). Analyzing Social Networks Using R. SAGE.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Consider the different types of networks in the Hawthorne bank wiring room network.
+## These are elements 4 to 9 in the project/dataset "Hawthorne_BankWiring".
+## All networks are binary, except the last, 9th network ("TradeJobs").
+## Although the function can deal with valued networks, we decide to dichotomize the last
+## network first and store this as a new (10th) element in the list object:
+Hawthorne_BankWiring$TradeJobsDich&lt;-(Hawthorne_BankWiring$TradeJobs&gt;0)*1
+## We can now apply the function to all binary networks:
+xMultipleTieComposition(Hawthorne_BankWiring[c(4:8,10)])
+## See Chapter 8 in Borgatti, Everett, Johnson and Agneessens (2022)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>xUCINET</em> version 0.0.1.0022 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

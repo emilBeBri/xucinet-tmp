@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Measures to capture structural holes.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for xStructuralHoles {xUCINET}"><tr><td>xStructuralHoles {xUCINET}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Measures to capture structural holes.</h2>
+
+<h3>Description</h3>
+
+<p>This function takes a one-mode network (<code>NET1</code>) and calculates measures of structural equivalence.
+It returns for each node in the rows of the matrix information about effective size and/or constraint.
+Both measures also work for valued networks.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+xStructuralHoles(
+  NET1,
+  Measures = c("EffectiveSize", "Constraint"),
+  Loops = FALSE,
+  Include = "WholeNetwork",
+  Direction = "Out"
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>NET1</code></td>
+<td>
+<p>A one-mode network dataset stored as an object of class &quot;matrix&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>Measures</code></td>
+<td>
+<p>The choice of output to be provided. This can be &quot;EffectiveSize&quot;, and/or &quot;Constraint&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>Loops</code></td>
+<td>
+<p>Whether to include the Loops (default is to ignore the Loops).</p>
+</td></tr>
+<tr valign="top"><td><code>Include</code></td>
+<td>
+<p>Whether to consider the whole network (&quot;WholeNetwork&quot;) or only the egonetwork (&quot;EgoNetwork&quot;) around the node.</p>
+</td></tr>
+<tr valign="top"><td><code>Direction</code></td>
+<td>
+<p>How to define the alters for a node (at the moment only outgoing choices).</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A matrix containing different measures (columns) for each node (row).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Consider the Friendship network for Krackhardt's high-tech managers.
+xStructuralHoles(Padgett_FlorentineFamilies$Marriage)
+## Consider the Friendship network for Krackhardt's high-tech managers.
+xStructuralHoles(Krackhardt_HighTech$Friendship)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>xUCINET</em> version 0.0.1.0022 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

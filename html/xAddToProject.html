@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Add an additional network to an existing &quot;dataproject&quot;</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for xAddToProject {xUCINET}"><tr><td>xAddToProject {xUCINET}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Add an additional network to an existing &quot;dataproject&quot;</h2>
+
+<h3>Description</h3>
+
+<p>This function adds a network and information about that network to an existing &quot;dataproject&quot;.
+</p>
+
+<ul>
+<li><p> Last updated: 28 April 2022.
+</p>
+</li></ul>
+
+
+
+<h3>Usage</h3>
+
+<pre>
+xAddToProject(
+  ProjectName,
+  NetworkName = NULL,
+  NETFILE1 = NULL,
+  FileType = NULL,
+  InFormatType = "AdjMat",
+  NetworkDescription = NULL,
+  Mode = NA,
+  Directed = TRUE,
+  Loops = FALSE,
+  Values = NA,
+  Class = "matrix"
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>ProjectName</code></td>
+<td>
+<p>The name of the &quot;dataproject&quot;, to which the network needs to be added.</p>
+</td></tr>
+<tr valign="top"><td><code>NetworkName</code></td>
+<td>
+<p>The name to be given to the new network.</p>
+</td></tr>
+<tr valign="top"><td><code>NETFILE1</code></td>
+<td>
+<p>A single social network file. This could be a csv file or an R object. The input type is defined in &quot;FileType&quot;, while the format of the input data is defined in &quot;InFormatType&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>FileType</code></td>
+<td>
+<p>The type of data that is being imported. Default is &quot;csv&quot;. Other options are &quot;Robject&quot; when the data is already an object in R, and &quot;csv2&quot;. Note that by default a csv file use a point (&quot;.&quot;) for the decimal point and a comma for the separator in most countries. However, in some Western European countries a comma is used for the decimal point and a semicolon for the separator, which will require &quot;csv2&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>InFormatType</code></td>
+<td>
+<p>The format used to store the network data in a csv file. Currently only reads in an adjacency matrix &quot;AdjMat&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>NetworkDescription</code></td>
+<td>
+<p>Detailed information about the network being imported.</p>
+</td></tr>
+<tr valign="top"><td><code>Mode</code></td>
+<td>
+<p>Character (string), indicating a name for the mode of the network. For two-mode networks this would need to contain the names for both modes. If it is a one-mode network, and Mode=NA then the mode name &quot;A&quot; will be assumed.</p>
+</td></tr>
+<tr valign="top"><td><code>Directed</code></td>
+<td>
+<p>Logical, whether the network should be considered directed or not. The default is TRUE.</p>
+</td></tr>
+<tr valign="top"><td><code>Loops</code></td>
+<td>
+<p>Logical, whether the network's self-nominations (loops) should be considered. By default this is FALSE and loops are not considered.</p>
+</td></tr>
+<tr valign="top"><td><code>Values</code></td>
+<td>
+<p>Character string, indicating what type of values the network contains (e.g., &quot;Binary&quot;,&quot;Nominal&quot;,&quot;Ordinal&quot;,&quot;Rank&quot;,&quot;Interval&quot;,&quot;Ratio&quot;).</p>
+</td></tr>
+<tr valign="top"><td><code>Class</code></td>
+<td>
+<p>The way the data is being stored. Currently the network will be stored as an adjacency matrix in an object of class &quot;matrix&quot;.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A &quot;dataproject&quot; object containing network data.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Filip Agneessens, <a href="mailto:filipagneessens2@gmail.com">filipagneessens2@gmail.com</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## We can consider an existing network and add the transposed
+## Create a network with ordinal categories (0='no relation', 1='acquaintance', 2='friend',
+##    3='good friend') as an (adjacency) matrix:
+Friendship3&lt;-matrix(c(0,1,1, 2,0,3, 0,2,0),3,3, byrow=TRUE)
+## Add node names to the matrix:
+rownames(Friendship3)&lt;-c("a","b","c")
+colnames(Friendship3)&lt;-rownames(Friendship3)
+
+## Now create the "dataproject", which we call "SchoolClass_Project1"
+SchoolClass_Project1&lt;-xCreateProject(GeneralDescription="Dataset among 3 students",
+     NetworkName="Friendship",
+     NETFILE1=Friendship3,
+     FileType="Robject",
+     InFormatType="AdjMat",
+     NetworkDescription="Strength (0=no relation, 1=acquaintance, 2=friend, 3=good friend)",
+     Mode=c("Students"),
+     Directed=TRUE,
+     Loops=FALSE,
+     Values="Ordinal",
+     Class="matrix",
+     References="No references")
+## Check the newly created "dataproject" object
+SchoolClass_Project1
+
+## Now create the transposed
+SchoolClass_Project1&lt;-xAddToProject(ProjectName=SchoolClass_Project1,
+        NetworkName="Friendship_Tr",
+        NETFILE1=t(SchoolClass_Project1$Friendship),
+        FileType="Robject",
+        InFormatType="AdjMat",
+        NetworkDescription="Transposed of the friendship network",
+        Mode=c("Students"),
+        Directed=TRUE,
+        Loops=FALSE,
+        Values="Ordinal",
+        Class="matrix")
+## Check the new result:
+SchoolClass_Project1
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>xUCINET</em> version 0.0.1.0022 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

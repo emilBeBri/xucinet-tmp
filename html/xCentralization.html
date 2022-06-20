@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Calculates the (out)degree centralization for a one-mode or...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for xCentralization {xUCINET}"><tr><td>xCentralization {xUCINET}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Calculates the (out)degree centralization for a one-mode or two-mode network.</h2>
+
+<h3>Description</h3>
+
+<p>Using a one-mode or two-mode binary network, this function calculates the level of centralization in a network based on (out)degree.
+It takes the maximum observed (out)degree as a point of reference against which the (out)degrees for all other nodes are compared.
+No missing data allowed. The Loops is ignored.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+xCentralization(NET1)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>NET1</code></td>
+<td>
+<p>A one-mode or two-mode network stored as a 'matrix' object.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A single value.
+</p>
+
+
+<h3>References</h3>
+
+<p>Chapter 10. Borgatti, S. P., Everett, M. G., Johnson, J. C., &amp; Agneessens, F. (2022). Analyzing Social Networks Using R. SAGE.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../xUCINET/help/xDensity.html">xDensity()</a></code>, <code><a href="../../xUCINET/help/xDegreeCentrality.html">xDegreeCentrality()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Two simple undirected one-mode networks (with the same value for connectedness)
+xProportionReach(ASNR_Fig10x3C, kReach=2)
+xProportionReach(ASNR_Fig10x3D, kReach=3)
+## Adding an attribute for rows and columns:
+xProportionReach(ASNR_Fig10x3D,ROWS=c(1,1,1,2,2,2),COLS=c(1,1,1,2,2,2))
+
+## Some more complex examples with a two-mode network
+NET2&lt;-matrix(c(0,1,0,0,0,0,0, 1,0,0,0,0,0,0, 1,1,1,0,0,1,0, 0,1,1,0,0,0,0,
+               0,0,0,1,1,0,0, 1,0,0,0,0,1,0, 0,1,1,1,0,1,0, 0,0,1,0,0,0,0),8,7,byrow=TRUE)
+## When running the function on the twomode, note the use of "A" and "B" to separate
+## mode A (row) from mode B (column) nodes:
+xProportionReach(NET2)
+## When adding an attribute for ROWS, note that mode A nodes are now split further
+## into 2 groups: A_1, A_2 and A_3.
+xProportionReach(NET2,ROWS=c(1,1,1,2,2,2,3,3))
+## We can also keep the values separate for each unique node in the column:
+xProportionReach(NET2,ROWS=c(1,1,1,2,2,2,3,3),COLS="Unique")
+## Or have a different attribute for mode A and mode B:
+xProportionReach(NET2,ROWS=c(1,1,1,2,2,2,3,3),COLS=c("P","E","T","T","P","T","E"))
+## Or combine unique (in the rows) with aggregating all (in the columns):
+xProportionReach(NET2,ROWS="Unique")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>xUCINET</em> version 0.0.1.0022 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Information based the similarity in continuous...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for xEgoAlterSimilarityCon {xUCINET}"><tr><td>xEgoAlterSimilarityCon {xUCINET}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Information based the similarity in continuous characteristics between ego and the alters that ego is directly connected with.</h2>
+
+<h3>Description</h3>
+
+<p>This function takes a one-mode network (<code>NET1</code>) and a vector containing a continuous nodal attribute (<code>ATTR1</code>).
+It returns for each node in the rows of the matrix information related to the similarity or difference in attribute data between the node and its alters.
+For valued networks it weights the impact of alters by the strength of its ties.
+As an output it provides by default:
+-&quot;AvDiffAv&quot;: (Weighted) average of difference between alter's values and ego's own value.
+-&quot;AvAbsDiff&quot;: (Weighted) average of the absolute difference between alter's values and ego's own value.
+-&quot;AvSqDiff&quot;: (Weighted) average of the squared differences between alter's values and ego's own value.
+-&quot;Corr_AbsDiff&quot;: For any ego, correlation between ego's (valued) link to alter and the absolute difference in value between ego and alter. Has n-1 alters as cases.
+-&quot;Corr_Zegers&quot;: For any ego, correlation between ego's link to alter and the product of values for ego and alter divided by their squared values.
+-&quot;Corr_MinOverMax&quot;: For any ego, correlation between ego's link to alter and the lowest over the highest value.
+-&quot;Corr_Product&quot;: For any ego, correlation between ego's link to alter and the product of values for ego and alter.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+xEgoAlterSimilarityCon(
+  NET1,
+  ATTR1,
+  Measures = c("AvDiff", "AvAbsDiff", "AvSqDiff", "Corr_AbsDiff", "Corr_DiffSq",
+    "Corr_Zegers", "Corr_MinOverMax", "Corr_Product"),
+  Loops = FALSE
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>NET1</code></td>
+<td>
+<p>A network dataset stored as an object of class &quot;matrix&quot;.
+A one-mode network with (n) nodes, or a two-mode network
+with (m) nodes of mode &quot;A&quot; (rows) and (n) nodes of mode &quot;B&quot; (columns).</p>
+</td></tr>
+<tr valign="top"><td><code>ATTR1</code></td>
+<td>
+<p>A continuous attribute vector of size (n).</p>
+</td></tr>
+<tr valign="top"><td><code>Measures</code></td>
+<td>
+<p>The choice of output to be provided. See description.</p>
+</td></tr>
+<tr valign="top"><td><code>Loops</code></td>
+<td>
+<p>Whether to ignore the Loops (default is to ignore the Loops).</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A matrix containing different measures (columns) for each node (row).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Consider the Friendship network for Krackhardt's high-tech managers and the attribute age.
+xEgoAlterSimilarityCon(Krackhardt_HighTech$Friendship,Krackhardt_HighTech$Attributes$Age)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>xUCINET</em> version 0.0.1.0022 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

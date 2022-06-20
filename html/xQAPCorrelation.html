@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Performs a correlation test using a classic (and a...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for xQAPCorrelation {xUCINET}"><tr><td>xQAPCorrelation {xUCINET}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Performs a correlation test using a classic (and a permutation-based) significance test between two network variables</h2>
+
+<h3>Description</h3>
+
+<p>This function takes two networks among the same nodes and returns the correlation coefficient(&quot;CorrCoef&quot;) and the classic (two-tailed) significance test (&quot;ClassicP_2T&quot;).
+If NPERM (number of permutations) is set to a value higher than 0 (default is 1000), a quadratic assignment permutations-based (QAP) significance is also provided,
+which will provide information about the correlations coefficients for the permuted networks (including the histogram). A higher value than 1000 is generally advisable. Both the one-tailed (&quot;Prop_SmallerThan&quot; or &quot;Prop_GreaterThan&quot;)
+and the two-tailed (&quot;Prop_MoreExtreme&quot;) test are given. Note that cases with missing values are included in the permutation and this can impact the degrees of freedom for the correlations obtained for the permutations.
+For example, suppose the same 20% of cases are missing for both variables (i.e., unit non-response), then permuting these missings will mean that a lot more cases will have a missing for at least one of both variables.
+</p>
+
+<ul>
+<li><p> Last updated: 23 April 2022.
+</p>
+</li></ul>
+
+
+
+<h3>Usage</h3>
+
+<pre>
+xQAPCorrelation(NET1, NET2, NPERM = 1000, Directed = TRUE, Loops = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>NET1</code></td>
+<td>
+<p>A first network.</p>
+</td></tr>
+<tr valign="top"><td><code>NET2</code></td>
+<td>
+<p>A second network, among the same nodes as the first network.</p>
+</td></tr>
+<tr valign="top"><td><code>NPERM</code></td>
+<td>
+<p>A positive integer value indicating the number of permutations to be used for the statistical test. If NPERM is set to NULL, NA or 0, no permutation-based significance test is performed.</p>
+</td></tr>
+<tr valign="top"><td><code>Directed</code></td>
+<td>
+<p>Whether the analysis should consider ties in both directions (node i to j and j to i) as separate cases. Default is TRUE.</p>
+</td></tr>
+<tr valign="top"><td><code>Loops</code></td>
+<td>
+<p>Whether to allow self-loops.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Prints a matrix with at least the following values: &quot;NumberOfCases&quot;, &quot;NumberOfValid1&quot;, &quot;NumberOfValid2&quot;, &quot;NumberOfValidBoth&quot;, &quot;CorrCoef&quot;, &quot;ClassicP_2T&quot;, and in case a permutation test is performed, in addition: Mean, StandardDev, Min_Perm, Max_Perm, Prop_SmallerThan, Prop_GreaterThan, Prop_MoreExtreme, Prop_SmallerThanABS, Prop_GreaterThanABS, NumberOfPermut. When using &quot;&lt;-&quot; creates a list object with these respective values as separate elements.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Filip Agneessens <a href="mailto:filipagneessens2@gmail.com">filipagneessens2@gmail.com</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+X1&lt;-matrix(c(2,4,2,3,3,1,3,4,1),3,3)
+X2&lt;-matrix(c(4,1,5,2,1,4,2,2,3),3,3)
+RESULS1&lt;-xQAPCorrelation(X1,X2, NPERM=5000)
+RESULS1
+xQAPCorrelation(X1,X2,NPERM=0)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>xUCINET</em> version 0.0.1.0022 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

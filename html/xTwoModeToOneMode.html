@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Transforms a two-mode network into a one-mode network...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for xTwoModeToOneMode {xUCINET}"><tr><td>xTwoModeToOneMode {xUCINET}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Transforms a two-mode network into a one-mode network (one-mode projection).</h2>
+
+<h3>Description</h3>
+
+<p>This function takes a two-mode network stored as a matrix and transforms it
+into a one-mode network (i.e., a one-mode projection).
+The type of one-mode projections for nodes of mode 1 based on two-mode data
+involving ties between mode 1 and mode 2 nodes are:
+</p>
+
+<ul>
+<li><p> &quot;CrossProd&quot;: the number of common connections of nodes of the other mode. In the case of a valued network, this give the sum of the product of the tie strength to other nodes of the other modes. For z[i,j]=(Sum[k](x[i,k]*x[j,k]))
+</p>
+</li>
+<li><p> &quot;CrossProdDMin&quot;: the number of common connections of nodes of the other mode divided by the maximum possible given the degree of both nodes. In the case of a valued network, this give the sum of the product of the tie strength to other nodes of the other modes. For z[i,j]=(Sum[k](x[i,k]*x[j,k]))/(Sum[k](min(x[i,k],x[j,k])))
+</p>
+</li>
+<li><p> &quot;ExactMatch&quot;: the relation between two nodes of a mode is calculated as the number of times the two nodes make the same choices and non-choices. In the case of a valued network, the same strength of tie to the other mode. For z[i,j]=(Sum[k](x[i,k]=x[j,k])). This can also be seen as the absolute difference between 2.
+</p>
+</li>
+<li><p> &quot;Jaccard&quot;: the number of common connections to nodes of the other mode, divided by the total number of connections to nodes of mode B by either (or both). For z[i,j]=(Sum[k](x[i,k]*x[j,k]))/(Sum[k](x[i,k]=1 AND/OR xjk=1))
+</p>
+</li>
+<li><p> &quot;CrossMin&quot;: the strength of a tie between two nodes of a mode is the sum of the minimum of both ties. For z[i,j]=(Sum[k](min(x[i,k],x[j,k])))
+</p>
+</li>
+<li><p> &quot;Correlation&quot; Pearson's product-moment correlation.
+</p>
+</li>
+<li><p> &quot;Covariance&quot; Mean-centered cross products: Sxy/n - SxSy/n^2
+</p>
+</li></ul>
+
+
+
+<h3>Usage</h3>
+
+<pre>
+xTwoModeToOneMode(NET2, Measure = "CrossProd")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>NET2</code></td>
+<td>
+<p>A single two-mode network stored in an R object as a matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>Measure</code></td>
+<td>
+<p>Character string, indicating which type of transformation to use.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A one-mode projection
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+xTwoModeToOneMode(Davis_SouthernWomen$Attendance)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>xUCINET</em> version 0.0.1.0022 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

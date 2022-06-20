@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: #&mdash;&mdash;&mdash;&mdash;&mdash;- Provides the clique membership for a...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for xCliquesMembership {xUCINET}"><tr><td>xCliquesMembership {xUCINET}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>#&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;
+Provides the clique membership for a one-mode network</h2>
+
+<h3>Description</h3>
+
+<p>Using an binary, undirected one-mode network (NET1), this function gives the maximum clique solutions.
+Clique membership is captured by a matrix, with nodes as rows and each clique as a column.
+The minimum size of the cliques being considered are defined in (Min).
+The network should be a binary and undirected one-mode network.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+xCliquesMembership(NET1, Min = 3)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>NET1</code></td>
+<td>
+<p>A binary, undirected one-mode network stored as a 'matrix' object.</p>
+</td></tr>
+<tr valign="top"><td><code>Min</code></td>
+<td>
+<p>The minimum size for cliques being reported. By default a clique has at least 3 nodes.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A matrix with membership for each node (row) by clique (column).
+</p>
+
+
+<h3>References</h3>
+
+<p>Chapter 11. Borgatti, S. P., Everett, M. G., Johnson, J. C., &amp; Agneessens, F. (2022). Analyzing Social Networks Using R. SAGE.
+igraph package - https://igraph.org
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../xUCINET/help/xCliquesCoMembership.html">xCliquesCoMembership()</a></code>, <code><a href="../../xUCINET/help/xCliquesOverlap.html">xCliquesOverlap()</a></code>, <code><a href="../../igraph/help/cliques.html">igraph::max_cliques()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Examples of undirected networks (See chapter 11 of Borgatti et al., 2022):
+xCliquesMembership(Hawthorne_BankWiring$Game)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>xUCINET</em> version 0.0.1.0022 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

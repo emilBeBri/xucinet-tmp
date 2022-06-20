@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Performs a correlation test using a classic (and a...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for xCorrelation {xUCINET}"><tr><td>xCorrelation {xUCINET}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Performs a correlation test using a classic (and a permutation-based) significance test between two vector variables</h2>
+
+<h3>Description</h3>
+
+<p>This function takes two variables (vectors of equal length) and returns the correlation coefficient(&quot;CorrCoef&quot;) and the classic (two-tailed) significance test (&quot;ClassicSign_2tailed&quot;).
+If NPERM (number of permutations) is set to an integer value higher than 0 (default is 1000), a permutations-based significance is also provided,
+which will provide information about the correlations coefficients for the permuted variables (including the histogram). A higher value than 1000 is generally advisable. Both the one-tailed (&quot;AsSmall&quot; or &quot;AsLarge&quot;)
+and the two-tailed (&quot;AsExtreme&quot;) test are given. Note that cases with missing values are allowed, but that this can impact the degrees of freedom for the correlations obtained for the permutations.
+For example, suppose the same 20% of cases are missing for both variables (i.e., unit non-response), then permuting these missing values will mean that a lot more cases will have a missing for (at least) one of both variables.
+</p>
+
+<ul>
+<li><p> Last updated: 26 April 2022.
+</p>
+</li></ul>
+
+
+
+<h3>Usage</h3>
+
+<pre>
+xCorrelation(VEC1, VEC2, NPERM = 1000)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>VEC1</code></td>
+<td>
+<p>A first vector of values.</p>
+</td></tr>
+<tr valign="top"><td><code>VEC2</code></td>
+<td>
+<p>A second vector of values, of equal length as VEC1.</p>
+</td></tr>
+<tr valign="top"><td><code>NPERM</code></td>
+<td>
+<p>A positive integer value indicating the number of permutations to be used for the statistical test. If NPERM is set to NULL, NA or 0, no permutation-based significance test is performed.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Returns an object containing the correlation coefficient ($CorrCoeff) and standard significance test (ClassicSign_2tailed), and in the case a permutation test is performed, in addition a significance based on the permutation (&quot;AsSmall&quot;, &quot;AsLarge&quot;, and &quot;AsExtreme&quot;).
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Filip Agneessens <a href="mailto:filipagneessens2@gmail.com">filipagneessens2@gmail.com</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+RESULS1&lt;-xCorrelation(c(2,4,2,3,3,1),c(4,2,3,2,1,5), NPERM=5000)
+RESULS1
+RESULS2&lt;-xCorrelation(c(2,3,2,1,2,3,2,1),c(4,2,3,2,4,2,3,2), NPERM=5000)
+RESULS2
+xCorrelation(c(1,4,2,1),c(4,2,3,3), NPERM=0)
+xCorrelation(c(1,4,2,1),c(4,2,3,3), NPERM=NA)
+xCorrelation(c(1,4,2,1),c(4,2,3,3), NPERM=NULL)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>xUCINET</em> version 0.0.1.0022 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

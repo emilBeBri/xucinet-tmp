@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Calculates measures of homophily for a one-mode network.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for xGroupHomophily {xUCINET}"><tr><td>xGroupHomophily {xUCINET}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Calculates measures of homophily for a one-mode network.</h2>
+
+<h3>Description</h3>
+
+<p>Using a one-mode binary network, this function calculates measures of homophily.
+This includes the proportion homophilous ties, the EI index and Yule's Q.
+Missing data are allowed. The Loops is ignored.
+Provides output:
+-&quot;a&quot;: the number of pairs of nodes that have a tie and where both nodes belong to the same category.
+-&quot;b&quot;: the number of pairs of nodes that have a tie and where both nodes belong to a different category.
+-&quot;c&quot;: the number of pairs of nodes that do not have a tie and where both nodes belong to the same category.
+-&quot;d&quot;: the number of pairs of nodes that do not have a tie and where both nodes belong to a different category.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+xGroupHomophily(NET1, ATTR1)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>NET1</code></td>
+<td>
+<p>A one-mode binary network stored as a 'matrix' object.</p>
+</td></tr>
+<tr valign="top"><td><code>ATTR1</code></td>
+<td>
+<p>A vector containing the attribute.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A vector with measures related to homophily.
+</p>
+
+
+<h3>References</h3>
+
+<p>Chapter 10. Borgatti, S. P., Everett, M. G., Johnson, J. C., &amp; Agneessens, F. (2022). Analyzing Social Networks Using R. SAGE.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../xUCINET/help/xDensity.html">xDensity()</a></code>, <code><a href="../../xUCINET/help/xEgoAlterSimilarityCat.html">xEgoAlterSimilarityCat()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Two examples of directed networks (See chapter 10 of Borgatti et al., 2022):
+xGroupHomophily(Krackhardt_HighTech$Advice,Krackhardt_HighTech$Attributes$Department)
+xGroupHomophily(Krackhardt_HighTech$Friendship,Krackhardt_HighTech$Attributes$Department)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>xUCINET</em> version 0.0.1.0022 <a href="00Index.html">Index</a>]</div>
+</div></body></html>
