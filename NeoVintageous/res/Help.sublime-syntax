@@ -1,0 +1,146 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/3/syntax.html
+name: Help (NeoVintageous)
+scope: text.neovintageous.help
+hidden: true
+contexts:
+  main:
+
+    - match: (\*)([^*\s]+)(\*)
+      captures:
+        1: punctuation.definition.link.reference conceal
+        2: entity.name.neovintageous
+        3: punctuation.definition.link.reference conceal
+
+    - include: jumptags
+
+    - match: \bhttps://[a-zA-Z0-9_\.\\/-]+\b
+      scope: markup.underline.link.neovintageous
+
+    # Fix incorrect jump tag matching <---->
+    - match: \<[-]+\>
+
+    # fix incorrect backtick inline code matches
+    - match: '^(i|a)\`\s+'
+
+    - match: \<[^\>\s]+\>
+      scope: markup.raw.inline.neovintageous jumptag
+
+    - match: \`[^`]+\`
+      scope: markup.raw.inline.neovintageous jumptag
+
+    - match: '\[[^\]\s]+\]'
+      scope: markup.raw.inline.neovintageous jumptag
+
+    - match: '\b(CTRL|META|ALT)-(SHIFT-)?[^\s]+'
+      scope: markup.raw.inline.neovintageous jumptag
+
+    - match: ':[a-zA-Z]+\[[a-zA-Z]+\]'
+      scope: command.neovintageous
+
+    - match: ':[a-zA-Z]+[a-zA-Z]+\b'
+      scope: jumptag
+
+    - match: ^\s+\*Note\s+.*$
+      scope: markup.inserted.neovintageous
+
+    - match: ^\s+\*Todo\s+.*$
+      scope: markup.ignored.neovintageous
+
+    - match: ^\s+\*Error\s+.*$
+      scope: markup.deleted.neovintageous
+
+    - match: \{(?=[a-zA-Z])
+      scope: markup.raw.inline.neovintageous
+      push:
+        - match: \}
+          scope: markup.raw.inline.neovintageous
+          pop: true
+        - include: jumptags
+        - match: .
+          scope: markup.raw.inline.neovintageous
+
+    - match: \=|-{78}
+      scope: comment.neovintageous
+
+    - match: '(?:^|\s+)(.+)(~)$'
+      captures:
+        1: string
+        2: punctuation.definition.raw.end conceal
+
+    - match: '(?:^|\s)\>\n?$'
+      scope: punctuation.definition.raw.block conceal
+      push:
+        - match: ^\<\n?$
+          scope: punctuation.definition.raw.block conceal
+          pop: true
+        - match: ^\<(?=\s)
+          scope: punctuation.definition.raw.block conceal
+          pop: true
+        - match: ^(?=[^\s<])|^\s*\<$|^\<
+          scope: punctuation.definition.raw.block conceal
+          pop: true
+        - match: '^.+\n?$'
+          scope: markup.raw.block.neovintageous
+
+    # HEADER ... entity
+    - match: ^\s+(\*)([^\*]+)(\*)$
+      captures:
+        1: punctuation.definition.link.reference conceal
+        2: entity.name.neovintageous
+        3: punctuation.definition.link.reference conceal
+    - match: ^([A-Z][A-Za-z\-\s]+)\s+(\*)([^\*]+)(\*)$
+      captures:
+        1: storage.neovintageous
+        2: punctuation.definition.link.reference conceal
+        3: entity.name.neovintageous
+        4: punctuation.definition.link.reference conceal
+
+    # HEADER ... Multiple (2) entities
+    - match: ^\s+(\*)([^\*]+)(\*)\s+(\*)([^\*]+)(\*)$
+      captures:
+        1: punctuation.definition.link.reference conceal
+        2: entity.name.neovintageous
+        3: punctuation.definition.link.reference conceal
+        4: punctuation.definition.link.reference conceal
+        5: entity.name.neovintageous
+        6: punctuation.definition.link.reference conceal
+    - match: ^([A-Z][A-Za-z\-\s]+)\s+(\*)([^\*]+)(\*)\s+(\*)([^\*]+)(\*)$
+      captures:
+        1: storage.neovintageous
+        2: punctuation.definition.link.reference conceal
+        3: entity.name.neovintageous
+        4: punctuation.definition.link.reference conceal
+        5: punctuation.definition.link.reference conceal
+        6: entity.name.neovintageous
+        7: punctuation.definition.link.reference conceal
+
+    # HEADER ... Multiple (3) entities
+    - match: ^([A-Z\-\s]+)\s+(\*)([^\*]+)(\*)\s+(\*)([^\*]+)(\*)\s+(\*)([^\*]+)(\*)$
+      captures:
+        1: storage.neovintageous
+        2: punctuation.definition.link.reference conceal
+        3: entity.name.neovintageousa
+        4: punctuation.definition.link.reference conceal
+        5: punctuation.definition.link.reference conceal
+        6: entity.name.neovintageousa
+        7: punctuation.definition.link.reference conceal
+        8: punctuation.definition.link.reference conceal
+        9: entity.name.neovintageousa
+        10: punctuation.definition.link.reference conceal
+
+    # HEADER ... figlet
+    - match: ^\s+[\\/_|()`, ]*$
+      scope: comment.neovintageous
+
+  jumptags:
+    - match: (\|)([^|\s]+)(\|)
+      scope: markup.underline.link
+      captures:
+        1: punctuation.definition.link conceal
+        2: jumptag
+        3: punctuation.definition.link conceal
+
+    - match: \'[a-z][a-z_]+\'
+      scope: string jumptag

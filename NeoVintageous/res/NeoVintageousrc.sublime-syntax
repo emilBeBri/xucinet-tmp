@@ -1,0 +1,85 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/3/syntax.html
+name: NeoVintageousrc (NeoVintageous)
+file_extensions:
+  - .neovintageousrc
+  - .vintageousrc
+scope: source.neovintageousrc
+hidden: true
+contexts:
+  main:
+
+    # Comments
+    - match: "^\\s*\".*"
+      scope: comment.line.neovintageourc
+
+    # Mapping commands.
+    - match: ^:?((i|n|o|s|v)?noremap)\b
+      scope: keyword.control.neovintageourc
+
+    # Recursive mappings were replaced with non-recursive mappings because they
+    # were not implemented properly and can cause infinite loop problems.
+    # https://github.com/NeoVintageous/NeoVintageous/blob/master/CHANGELOG.md#removed-3
+    - match: ^:?\b(i|n|o|s|v)?map.*
+      scope: invalid.neovintageourc
+
+    # Mapleader.
+    - match: ^:?(let) (map(?:local)?leader)(=).*
+      captures:
+        1: keyword.control.neovintageourc
+        2: variable.language.neovintageourc
+        3: keyword.operator.assignment.neovintageourc
+
+    # Set.
+    - match: ^:?(set) ([a-z]+)(=)?(.+)?$
+      captures:
+        1: keyword.control.neovintageourc
+        2: entity.name.neovintageourc
+
+    # Keys <{named}>
+    - match: (?i)\<(bs|bar|bslash|cr|csi|del|down|eol|end|enter|esc|ff|help|home|insert|leader|left|nl|nul|pagedown|pageup|return|right|space|tab|undo|up|lt|xcsi)>
+      scope: storage.type.neovintageourc
+
+    # Keys <C-{named}>
+    - match: \<C-(Left|Right)>
+      scope: storage.type.neovintageourc
+
+    # Keys <S-{named}>
+    - match: \<S-(Up|Down|Left|Right)>
+      scope: storage.type.neovintageourc
+
+    # Keys <C-x>, <D-x>, <M-x>, <S-x>, etc.
+    - match: \<(A|C|D|M|S)\-[^>]+\>
+      scope: storage.type.neovintageourc
+
+    # Keys <C-S-x>, <D-S-x>, <M-S-x>, etc.
+    - match: \<(C|D|M)\-S-[^>]+\>
+      scope: storage.type.neovintageourc
+
+    # Keys <k{named}>
+    - match: \<k(Home|End|Page(Up|Down)|Plus|Minus|Multiply|Divide|Enter|Point)\>
+      scope: storage.type.neovintageourc
+
+    # Keys <k0> - <k9>
+    - match: \<k[0-9]\>
+      scope: storage.type.neovintageourc
+
+    # Keys <F1> - <F12>
+    - match: \<F([1-9]|1[0-2])\>
+      scope: storage.type.neovintageourc
+
+    # The '|' character is used to chain commands. Users should
+    # escape it with a slash or use '<bar>'. See :h map-bar. It's
+    # translated to <bar> internally (implementation detail).
+    # See https://github.com/NeoVintageous/NeoVintageous/issues/615.
+    - match: '(\\)[|]'
+      captures:
+        1: constant.character.escape.neovintageourc
+
+    - match: '\|'
+      scope: invalid.neovintageourc
+
+    # Anything left is invalid.
+    - match: ^.*$
+      scope: invalid.neovintageourc

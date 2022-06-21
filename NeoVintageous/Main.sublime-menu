@@ -1,0 +1,32 @@
+[
+    {
+        "id": "preferences",
+        "children": [
+            {
+                "id": "package-settings",
+                "children": [
+                    {
+                        "caption": "NeoVintageous",
+                        "children": [
+                            {
+                                "caption": "CHANGELOG",
+                                "command": "open_file",
+                                "args": {
+                                    "file": "${packages}/NeoVintageous/CHANGELOG.md"
+                                }
+                            },
+                            {
+                                "caption": "LICENSE",
+                                "command": "open_file",
+                                "args": {
+                                    "file": "${packages}/NeoVintageous/LICENSE"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+
+]
